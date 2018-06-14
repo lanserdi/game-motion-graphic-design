@@ -11,6 +11,7 @@ SComponent.prototype.init = function(){
 
     this.x = 60;
     this.y = 200;
+    this.scale = 3;
 
     this.animationId = null;
     this.minLight = .3;
@@ -19,24 +20,24 @@ SComponent.prototype.init = function(){
     this.fires = this.getFires();
 }
 SComponent.prototype.drawBag = function(ctx){
-    var x = this.x, y = this.y, scale = 2;
+    var x = this.x, y = this.y, scale = this.scale;
 
-    ctx.shadowColor = 'hsla(60, 100%, 50%, .8)';
-    ctx.shadowBlur = 15;
-    ctx.shadowOffsetX = 1;
-    ctx.shadowOffsetY = 1;
 
     ctx.save();
+    ctx.shadowColor = 'hsla(40, 70%, 50%, 1)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     ctx.translate(x, y);
     ctx.scale(scale, scale);
     ctx.beginPath();
-    ctx.moveTo(0, 0);
+    ctx.moveTo(0, -1);
     ctx.lineTo(4, 0);
-    ctx.lineTo(7, -6);
+    ctx.lineTo(8, -6);
     ctx.lineTo(3, -5);
     ctx.lineTo(0, -9);
     ctx.lineTo(-3, -5);
-    ctx.lineTo(-7, -6);
+    ctx.lineTo(-8, -6);
     ctx.lineTo(-4, 0);
     ctx.closePath();
     ctx.lineJoin = 'round';
@@ -44,56 +45,40 @@ SComponent.prototype.drawBag = function(ctx){
     ctx.lineWidth = 1;
     ctx.stroke();
     var _LG = ctx.createLinearGradient(0, 0, 0, -10);
-    _LG.addColorStop(0, 'hsla(60, 80%, 50%, .1)');
-    _LG.addColorStop(1, 'hsla(60, 80%, 50%, .8)');
-    ctx.fillStyle = _LG;
+    _LG.addColorStop(0, 'hsl(60, 80%, 50%)');
+    _LG.addColorStop(1, 'hsl(60, 80%, 50%)');
     ctx.fillStyle = _LG;
     ctx.fill();
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x, y + 5);
-    ctx.scale(scale, scale);
+    ctx.shadowColor = 'hsla(40, 70%, 50%, 1)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.translate(x, y + 6);
+    ctx.scale(scale, scale * .87);
     ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(4, 0);
-    ctx.quadraticCurveTo(7, 1, 10, 6);
-    ctx.quadraticCurveTo(14, 14, 13, 16);
-    ctx.quadraticCurveTo(13, 20, 0, 20);
-    ctx.quadraticCurveTo(-9, 20, -10, 16);
-    ctx.quadraticCurveTo(-11, 13, -9, 7);
-    ctx.quadraticCurveTo(-7, 2, -4, 0);
-    ctx.closePath();
-    ctx.strokeStyle = 'hsl(60, 80%, 50%)';
-    ctx.lineWidth = 1;
+    ctx.arc(0, 10, 11, 0, Math.PI * 2, true);
+    ctx.strokeStyle = 'hsla(60, 80%, 50%, 1)';
+    ctx.lineWidth =
     ctx.stroke();
-    var _LG = ctx.createLinearGradient(0, 0, 20, 20);
-    _LG.addColorStop(0, 'hsla(60, 80%, 50%, .0)');
-    _LG.addColorStop(1, 'hsla(60, 80%, 50%, .8)');
+    var _LG = ctx.createLinearGradient(0, 0, 0, 30);
+    _LG.addColorStop(0, 'hsl(60, 80%, 50%)');
+    _LG.addColorStop(1, 'hsl(60, 80%, 50%)');
     ctx.fillStyle = _LG;
     ctx.fill();
     ctx.restore();
 
     ctx.save();
-    ctx.translate(x + 1, y + 22);
+    ctx.translate(x, y + 28);
+    ctx.rotate(Math.PI/180 * -14);
     ctx.scale(scale, scale);
-    ctx.beginPath()
-    ctx.moveTo(0, 0);
-    ctx.lineTo(3, -3);
-    ctx.moveTo(0, 0);
-    ctx.lineTo(-3, -3);
-    ctx.moveTo(0, 0);
-    ctx.lineTo(0, 6);
-    ctx.translate(0, 1);
-    ctx.moveTo(-3, 0);
-    ctx.lineTo(3, 0);
-    ctx.translate(0, 2);
-    ctx.moveTo(-3, 0);
-    ctx.lineTo(3, 0);
-    ctx.lineWidth = 1;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = 'hsl(60, 80%, 50%)';
-    ctx.stroke();
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.font = 'normal 700 13px "微软雅黑"';
+    ctx.fillStyle = 'hsl(30, 90%, 48%)';
+    ctx.fillText('S', 0, 0);
     ctx.restore();
 }
 SComponent.prototype.drawLight = function(ctx){
@@ -106,31 +91,31 @@ SComponent.prototype.drawLight = function(ctx){
         if(this.lightProgress < this.minLight) this.lightSpeed = 1;
     }
 
-    var x = this.x, y = this.y + 20, scale = 2;
+    var x = this.x, y = this.y + 20, scale = this.scale;
 
-    var _RG = ctx.createRadialGradient(0, 0, 0, 0, 0, 30);
+    var _RG = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
     _RG.addColorStop(0, 'hsla(60, 80%, 50%, '+this.lightProgress+')');
     _RG.addColorStop(1, 'hsla(60, 80%, 50%, 0)');
 
     ctx.save();
     ctx.translate(x, y);
-    ctx.scale(scale * .9, scale * .9);
+    ctx.scale(scale * .9, scale * 1);
     ctx.beginPath();
-    ctx.arc(0, 0, 30, 0, Math.PI*2, true);
+    ctx.arc(0, 0, 30, 0, Math.PI * 2, true);
     ctx.fillStyle = _RG;
     ctx.fill();
     ctx.restore();
 }
 SComponent.prototype.getFire = function(){
-    var x = -10 + Math.random() * 20, y = -20 + Math.random()*50;
-    var targetX = x + 20 + Math.random() * 20;
+    var x = -10 + Math.random() * 30, y = -20 + Math.random() * 30;
+    var targetX = x + 20 + Math.random() * 30;
     var targetY = y - 20 - Math.random() * 20;
     var fire = {
         x: x,
         y: y,
         targetX: targetX,
         targetY: targetY,
-        speedX: .2 + Math.random() * .1,
+        speedX: .2 + Math.random() * .15,
         speedY: .1 + Math.random() * .4,
         size: .4 + Math.random() * .5,
     };
@@ -163,7 +148,7 @@ SComponent.prototype.updateFire = function(ctx){
 }
 SComponent.prototype.drawFire = function(ctx){
     this.updateFire();
-    var x = this.x + 12, y = this.y + 25, scale = 2;
+    var x = this.x + 12, y = this.y + 25, scale = this.scale;
     for(var i = 0; i < this.fires.length; i++){
         var fire = this.fires[i];
         ctx.save();
@@ -201,9 +186,3 @@ SComponent.prototype.render = function(){
 
 var scomponent1 = new SComponent(document.querySelector('#canvas1'));
 scomponent1.startAni();
-
-var scomponent2 = new SComponent(document.querySelector('#canvas2'));
-scomponent2.startAni();
-
-var scomponent3 = new SComponent(document.querySelector('#canvas3'));
-scomponent3.startAni();
