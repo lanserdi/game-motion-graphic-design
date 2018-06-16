@@ -21,6 +21,14 @@
             <canvas id="canvas2"></canvas>
             <canvas id="canvas3"></canvas>
         </div>
-        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="dist/hok.js"></script>
+        <script type="text/javascript">
+            var scomponent1 = new hok.SC(document.querySelector('#canvas1'));
+            scomponent1.startAni();
+            var scomponent2 = new hok.SC(document.querySelector('#canvas2'));
+            scomponent2.startAni();
+            var scomponent3 = new hok.SC(document.querySelector('#canvas3'));
+            scomponent3.startAni();
+        </script>
     </body>
 </html>
