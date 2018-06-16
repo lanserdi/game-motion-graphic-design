@@ -1,6 +1,0 @@
-/dist
-/node_modules
-/webpack.config.js
-.babelrc
-index.html
-package-lock.json
