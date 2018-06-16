@@ -1,14 +1,17 @@
-export class SC {
-    constructor(eleCanvas){
-        this.eleCanvas = eleCanvas;
+import Component from './component';
+export class Recharge {
+    constructor(eleWrap){
+        this.eleWrap = eleWrap;
         this.init();
     }
     init(){
-        var width = 180, height = 300;
-        this.eleCanvas.width = width;
-        this.eleCanvas.height = height;
-        this.eleCanvas.style = 'width:'+width+'px; height:'+height+'px;';
-        this.ctx = this.eleCanvas.getContext('2d');
+        this.component = new Component();
+        this.eleWrap.appendChild(this.component.canvas);
+
+        var width = 180, height = 300, canvas = this.component.canvas;
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style = 'width:'+width+'px; height:'+height+'px;';
 
         this.x = 60;
         this.y = 200;
@@ -169,7 +172,7 @@ export class SC {
     }
     startAni(){
         this.animationId = window.requestAnimationFrame(function(){this.startAni()}.bind(this));
-        var ctx = this.ctx;
+        var ctx = this.component.context;
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         this.render();
     }
@@ -177,7 +180,7 @@ export class SC {
         window.cancelAnimationFrame(this.animationId);
     }
     render(){
-        var ctx = this.ctx;
+        var ctx = this.component.context;
         this.drawBag(ctx);
         this.drawLight(ctx);
         this.drawFire(ctx);

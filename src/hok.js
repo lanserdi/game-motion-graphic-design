@@ -1,1 +1,1 @@
-export { SC } from './sc';
+export { Recharge } from './recharge';
