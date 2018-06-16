@@ -13,15 +13,19 @@ export default class Layer {
 		this.eleWrap = eleWrap;
 
 		this.ratio = window.devicePixelRatio;
-		this.layerWidth = 300;
-		this.layerHeight = 300;
+		this.layerWidth = null;
+		this.layerHeight = null;
 
 		this.canvas = document.createElement('canvas');
-		this.canvas.width = this.layerWidth;
-		this.canvas.height = this.layerHeight;
-		this.canvas.style = `width:${this.layerWidth}px;height:${this.layerHeight}px;`;
 		this.context = this.canvas.getContext('2d');
 
 		eleWrap.appendChild(this.canvas);
+	}
+	setCanvasSize(width, height){
+		width = width || 400;
+		height = height || 400;
+		this.canvas.width = this.layerWidth = width;
+		this.canvas.height = this.layerHeight = height;
+		this.canvas.style = `width:${this.layerWidth}px;height:${this.layerHeight}px;`;
 	}
 }
