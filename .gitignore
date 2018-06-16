@@ -2,3 +2,8 @@ node_modules/
 index.html
 package-lock.json
 src/
+.babelrc
+.npmignore
+index.js
+webpack.config.js
+package.json
