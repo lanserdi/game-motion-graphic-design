@@ -1,6 +1,5 @@
 /node_modules/*
 /index.html
-/src/*
 /.babelrc
 /.npmignore
 /index.js
