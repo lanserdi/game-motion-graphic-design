@@ -1,17 +1,30 @@
+import Layer from './layer';
 import Component from './component';
-export class Recharge {
+/*
+[property]
+    layer: HTMLDivElement
+    animationId: number
+    minLight: number
+    maxLight: number
+    lightProgress: number
+    fires: Array<any>
+    lightSpeed: number
+[method]
+    drawBag
+    drawLight
+    getFire
+    getFires
+    updateFire
+    drawFire
+    startAni
+    stopAni
+    render
+*/
+export class Recharge extends Component{
     constructor(eleWrap){
-        this.eleWrap = eleWrap;
-        this.init();
-    }
-    init(){
-        this.component = new Component();
-        this.eleWrap.appendChild(this.component.canvas);
+        super();
 
-        var width = 180, height = 300, canvas = this.component.canvas;
-        canvas.width = width;
-        canvas.height = height;
-        canvas.style = 'width:'+width+'px; height:'+height+'px;';
+        this.layer = new Layer(eleWrap);
 
         this.x = 60;
         this.y = 200;
@@ -24,15 +37,13 @@ export class Recharge {
         this.fires = this.getFires();
     }
     drawBag(ctx){
-        var x = this.x, y = this.y, scale = this.scale;
-
         ctx.save();
         ctx.shadowColor = 'hsla(40, 70%, 50%, 1)';
         ctx.shadowBlur = 10;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
-        ctx.translate(x, y);
-        ctx.scale(scale, scale);
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
         ctx.beginPath();
         ctx.moveTo(0, -1);
         ctx.lineTo(4, 0);
@@ -59,8 +70,8 @@ export class Recharge {
         ctx.shadowBlur = 10;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
-        ctx.translate(x, y + 6);
-        ctx.scale(scale, scale * .87);
+        ctx.translate(this.x, this.y + 6);
+        ctx.scale(this.scale, this.scale * .87);
         ctx.beginPath();
         ctx.arc(0, 10, 11, 0, Math.PI * 2, true);
         ctx.strokeStyle = 'hsla(60, 80%, 50%, 1)';
@@ -74,9 +85,9 @@ export class Recharge {
         ctx.restore();
 
         ctx.save();
-        ctx.translate(x, y + 28);
+        ctx.translate(this.x, this.y + 28);
         ctx.rotate(Math.PI/180 * -14);
-        ctx.scale(scale, scale);
+        ctx.scale(this.scale, this.scale);
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
         ctx.font = 'normal 700 13px "微软雅黑"';
@@ -94,15 +105,13 @@ export class Recharge {
             if(this.lightProgress < this.minLight) this.lightSpeed = 1;
         }
 
-        var x = this.x, y = this.y + 20, scale = this.scale;
-
         var _RG = ctx.createRadialGradient(0, 0, 0, 0, 0, 25);
         _RG.addColorStop(0, 'hsla(60, 80%, 50%, '+this.lightProgress+')');
         _RG.addColorStop(1, 'hsla(60, 80%, 50%, 0)');
 
         ctx.save();
-        ctx.translate(x, y);
-        ctx.scale(scale * .9, scale * 1);
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale * .9, this.scale * 1);
         ctx.beginPath();
         ctx.arc(0, 0, 30, 0, Math.PI * 2, true);
         ctx.fillStyle = _RG;
@@ -110,7 +119,7 @@ export class Recharge {
         ctx.restore();
     }
     getFire(){
-        var x = -10 + Math.random() * 30, y = -20 + Math.random() * 30;
+        var x = -10 + Math.random() * 40, y = -20 + Math.random() * 50;
         var targetX = x + 20 + Math.random() * 30;
         var targetY = y - 20 - Math.random() * 20;
         var fire = {
@@ -172,7 +181,7 @@ export class Recharge {
     }
     startAni(){
         this.animationId = window.requestAnimationFrame(function(){this.startAni()}.bind(this));
-        var ctx = this.component.context;
+        var ctx = this.layer.context;
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         this.render();
     }
@@ -180,7 +189,7 @@ export class Recharge {
         window.cancelAnimationFrame(this.animationId);
     }
     render(){
-        var ctx = this.component.context;
+        var ctx = this.layer.context;
         this.drawBag(ctx);
         this.drawLight(ctx);
         this.drawFire(ctx);
