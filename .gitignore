@@ -1,9 +1,8 @@
-node_modules/
-index.html
-package-lock.json
-src/
-.babelrc
-.npmignore
-index.js
-webpack.config.js
-package.json
+/node_modules/*
+/index.html
+/src/*
+/.babelrc
+/.npmignore
+/index.js
+/web*
+/pack*
