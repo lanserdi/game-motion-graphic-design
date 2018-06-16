@@ -1,7 +1,5 @@
 /node_modules/*
-/index.html
 /.babelrc
 /.npmignore
 /index.js
 /web*
-/pack*
