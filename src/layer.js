@@ -24,8 +24,8 @@ export default class Layer {
 	setCanvasSize(width, height){
 		width = width || 400;
 		height = height || 400;
-		this.canvas.width = this.layerWidth = width;
-		this.canvas.height = this.layerHeight = height;
-		this.canvas.style = `width:${this.layerWidth}px;height:${this.layerHeight}px;`;
+		this.canvas.width = this.layerWidth = width * this.ratio;
+		this.canvas.height = this.layerHeight = height * this.ratio;
+		this.canvas.style = `width:${width}px;height:${height}px;`;
 	}
 }
