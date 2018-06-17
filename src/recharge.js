@@ -183,15 +183,6 @@ export class Recharge extends Component{
             ctx.restore();
         }
     }
-    startAni(){
-        this.animationId = window.requestAnimationFrame(function(){this.startAni()}.bind(this));
-        var ctx = this.layer.context;
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        this.render();
-    }
-    stopAni(){
-        window.cancelAnimationFrame(this.animationId);
-    }
     render(){
         var ctx = this.layer.context;
         this.drawBag(ctx);
