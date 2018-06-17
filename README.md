@@ -1,5 +1,4 @@
-# Honor-of-Kings
-canvas实现王者荣耀游戏部分技能动效；FUI；HUD
+# game-motion-graphic-design
 
 ![recharge](img/recharge.gif)
 ![focus](img/focus.gif)
