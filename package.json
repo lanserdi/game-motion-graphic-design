@@ -1,5 +1,5 @@
 {
-  "name": "Honor-of-Kings",
+  "name": "game-motion-graphic-design",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lanserdi/Honor-of-Kings.git"
+    "url": "git+https://github.com/lanserdi/game-motion-graphic-design.git"
   },
   "keywords": [],
   "author": "陈帅华",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lanserdi/Honor-of-Kings/issues"
+    "url": "https://github.com/lanserdi/game-motion-graphic-design/issues"
   },
-  "homepage": "https://github.com/lanserdi/Honor-of-Kings#readme",
+  "homepage": "https://github.com/lanserdi/game-motion-graphic-design#readme",
   "devDependencies": {
     "css-loader": "^0.28.11",
     "webpack": "^3.11.0",
