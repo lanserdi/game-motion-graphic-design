@@ -8,7 +8,7 @@ import Component from './component';
 export class Focus extends Component{
 	constructor(eleWrap){
 		super();
-        let width = 200;
+        let width = 240;
         let height = 200;
 
         this.layer = new Layer(eleWrap);
@@ -19,15 +19,6 @@ export class Focus extends Component{
         this.scale = 1;
 	}
     drawSingleArc(ctx){
-        this.line1 == undefined ? this.line1 = 0 : null;
-        this.line1Speed == undefined ? this.line1Speed = true : null;
-        if(this.line1Speed){
-            this.line1 += .05;
-            if(this.line1 > 10) this.line1Speed = false;
-        }else{
-            this.line1 -= .1;
-            if(this.line1 < 0) this.line1Speed = true;
-        }
 
         ctx.save();
         ctx.shadowColor = 'hsl(30, 100%, 50%)';
@@ -41,37 +32,39 @@ export class Focus extends Component{
         ctx.lineJoin = 'round';
         ctx.beginPath();
         ctx.arc(0, 0, 80, 0, Math.PI/180 * 70, false);
+        ctx.arc(0, 0, 92, Math.PI/180 * 72, Math.PI/180 * 50, true);
+        ctx.lineTo(60, 62);
+        ctx.arc(0, 0, 86, Math.PI/180 * 40, Math.PI/180 * 28, true);
+        ctx.lineTo(82, 33);
+        ctx.arc(0, 0, 92, Math.PI/180 * 20, Math.PI/180 * 0, true);
+        ctx.closePath();
         ctx.stroke();
+        ctx.fillStyle = 'hsla(53, 100%, 50%, .05)';
+        ctx.fill();
 
         ctx.beginPath();
-        ctx.arc(0, 0, 80, Math.PI/180 * 75, Math.PI/180 * 85, false);
-        ctx.lineTo(10, this.line1);
+        ctx.arc(0, 0, 80, Math.PI/180 * 75, Math.PI/180 * 86, false);
+        ctx.lineTo(6, 106);
+        ctx.lineTo(15, 115);
+        ctx.lineTo(24, 106);
+        ctx.closePath()
         ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(10, this.line1);
-        ctx.stroke();
+        ctx.fill();
 
         ctx.restore();
     }
     drawOuterSingleArc(ctx){
         ctx.save();
         ctx.shadowColor = 'hsl(30, 100%, 50%)';
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 20;
         ctx.scale(this.layer.ratio, this.layer.ratio);
         ctx.scale(this.scale, this.scale);
 
         ctx.strokeStyle = 'hsl(53, 100%, 50%)';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.beginPath();
-        ctx.arc(0, 0, 85, 0, Math.PI/180 * 20, false);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(0, 0, 75, Math.PI/180 * 40, Math.PI/180 * 80, false);
         ctx.stroke();
 
         ctx.restore();
@@ -82,7 +75,7 @@ export class Focus extends Component{
 
         ctx.save();
         ctx.translate(this.layer.layerWidth/2, this.layer.layerHeight/2);
-        ctx.scale(1, .5);
+        ctx.scale(1, .6);
         ctx.rotate(Math.PI/180 * this.outerCircleAngle);
         for(let i=0; i<4; i++){
             ctx.save();
@@ -98,7 +91,7 @@ export class Focus extends Component{
 
         ctx.save();
         ctx.translate(this.layer.layerWidth/2, this.layer.layerHeight/2);
-        ctx.scale(1, .5);
+        ctx.scale(1, .6);
         ctx.rotate(Math.PI/180 * this.circleAngle);
         for(let i=0; i<4; i++){
             ctx.save();
